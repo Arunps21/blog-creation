@@ -33,7 +33,7 @@ const userLogin=async(req,res)=>{
         password_db = user[0].password
         const result = await bcrypt.compare(password,password_db)
         if(result){
-            res.status(201).json({status:200,msg:"Login Success"})
+            res.status(201).json({status:201,msg:"Login Success",userId:user[0]._id})
         }
         else{
             res.status(200).json({status:200,msg:"Incorrect password"})

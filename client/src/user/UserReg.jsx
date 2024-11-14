@@ -2,9 +2,11 @@ import React from "react";
 import { Container, TextField, Button, Grid, Paper, Link, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 function UserReg() {
   const [reg,setReg] = useState({})
+  const navigate = useNavigate()
   const formData = new FormData()
   const regFun=(event)=>{
     setReg({...reg,[event.target.name]:event.target.value})
@@ -25,8 +27,9 @@ function UserReg() {
           "Content-Type":"multipart/form-data"
         }
       })
-      if(data.status==200){
+      if(data.status==201){
         alert(data.msg)
+        navigate("/userLogin")
       }
       else{
         alert(data.msg)

@@ -1,19 +1,12 @@
 import './App.css'
-import AddBlog from './blog/AddBlog'
-import HomePage from './blog/HomePage'
-import NavbarPage from './blog/NavbarPage'
-import UserLogin from './user/UserLogin'
-import UserReg from './user/UserReg'
-
+import BlogWrap from './blog/BlogWrap'
+import UserWrap from './user/UserWrap'
 function App() {
 
   return (
     <>
-    <NavbarPage/>
-    <AddBlog/>
-    <HomePage/>
-    <UserReg/>
-    <UserLogin/>
+    <BlogWrap/>
+    <UserWrap/>
     </>
   )
 }

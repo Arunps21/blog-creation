@@ -19,10 +19,10 @@ import { Link } from 'react-router-dom';
 const drawerWidth = 240;
 const navItems = [
   { name: 'Home', path: '/' },
-  { name: 'Login', path: '/userLogin' },
+  { name: 'AddBlog', path: '/addBlog' },
 ];
 
-function NavbarPage(props) {
+function UserNav(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -104,8 +104,8 @@ function NavbarPage(props) {
   );
 }
 
-NavbarPage.propTypes = {
+UserNav.propTypes = {
   window: PropTypes.func,
 };
 
-export default NavbarPage;
+export default UserNav;

@@ -9,9 +9,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function UserLogin() {
   const [login,setLogin]=useState({})
+  const navigate = useNavigate()
   const loginFun = (event)=>{
     setLogin({...login,[event.target.name]:event.target.value})
   }
@@ -20,7 +22,9 @@ function UserLogin() {
     try{
     const {data} = await axios.post("http://localhost:9000/userRouter/userLogin",login)
     if(data.status==201){
+      localStorage.setItem("userId",data.userId)
       alert(data.msg)
+      navigate("/userHome")
     }
     else{
       alert(data.msg)
@@ -69,8 +73,8 @@ function UserLogin() {
             </Grid>
           </Grid>
           <Typography align="center" sx={{ marginTop: 2 }}>
-            If you are not a user please{" "}
-            <a href="" style={{ textDecoration: "none", color: "#1976d2" }}>
+            If you are not a user please
+            <a href="/userReg" style={{ textDecoration: "none", color: "#1976d2" }}>
               Sign Up Here
             </a>
           </Typography>

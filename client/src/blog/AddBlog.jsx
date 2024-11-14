@@ -12,6 +12,7 @@ import axios from "axios";
 
 function AddBlog() {
   const [blog, setBlog] = useState({ title: "", description: "" });
+  const userId = localStorage.getItem("userId");
 
   const blogFun = (event) => {
     setBlog({ ...blog, [event.target.name]: event.target.value });
@@ -22,7 +23,8 @@ function AddBlog() {
     try {
       const { data } = await axios.post(
         "http://localhost:9000/blogRouter/addBlog",
-        blog
+        blog,
+        { headers: { userId: userId } } // Correctly passing userId in the headers
       );
       console.log(data);
       if (data.status === 201) {
