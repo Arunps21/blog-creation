@@ -24,7 +24,7 @@ function AddBlog() {
       const { data } = await axios.post(
         "http://localhost:9000/blogRouter/addBlog",
         blog,
-        { headers: { userId: userId } } // Correctly passing userId in the headers
+        { headers: { userId: userId } }
       );
       console.log(data);
       if (data.status === 201) {

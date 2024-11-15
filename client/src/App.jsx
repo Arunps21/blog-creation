@@ -36,7 +36,7 @@ const guestNavItems = [
 ];
 
 function UserNav(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -46,7 +46,7 @@ function UserNav(props) {
 
   const handleLogout = () => {
     localStorage.removeItem("userId");
-    navigate("/userLogin")
+    navigate("/userLogin");
   };
 
   const drawer = (
