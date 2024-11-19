@@ -48,14 +48,11 @@ const userLogin = async (req, res) => {
 
 const viewUser = async (req, res) => {
   try {
-    const view = await userModel.find();
+    const {userid} = req.headers
+    const view = await userModel.find({_id:userid});
 
     if (view.length > 0) {
-      const updatedView = view.map((user) => ({
-        ...user.toObject(),
-        image: user.image ? `/uploads/${user.image}` : null,
-      }));
-      res.status(201).json(updatedView);
+      res.status(201).json(view);
     } else {
       res.status(200).json([]);
     }

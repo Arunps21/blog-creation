@@ -35,7 +35,12 @@ export default function UserHome() {
   const viewUser = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:9000/userRouter/viewUser"
+        "http://localhost:9000/userRouter/viewUser",
+        {
+          headers: {
+            userId: userId,
+          },
+        }
       );
       setUser(data);
     } catch (err) {
@@ -60,6 +65,14 @@ export default function UserHome() {
     }
   };
 
+  const shareFun = (title, description) => {
+    navigator.share({
+      title,
+      description,
+      url: window.location.href,
+    });
+  };
+
   // Fetch all data on component mount
   useEffect(() => {
     const fetchData = async () => {
@@ -82,21 +95,24 @@ export default function UserHome() {
 
   return (
     <Container sx={{ padding: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        {user.length > 0 ? user[0].fullname : "User not found"}
-      </Typography>
-      {user.length > 0 && (
-        <img
-          src={user[0].image || "/default-image.png"}
-          alt="User"
-          style={{
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            marginBottom: "16px",
-          }}
-        />
-      )}
+      {user.length > 0 &&
+        user.map((profile) => (
+          <>
+            <Typography variant="h4" gutterBottom>
+              {profile.fullname}
+            </Typography>
+            <img
+              src={`http://localhost:9000/${profile.image}`}
+              alt="User"
+              style={{
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                marginBottom: "16px",
+              }}
+            />
+          </>
+        ))}
 
       <Grid container spacing={3} sx={{ padding: 2 }}>
         {view
@@ -114,7 +130,10 @@ export default function UserHome() {
                   <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                   </IconButton>
-                  <IconButton aria-label="share">
+                  <IconButton
+                    aria-label="share"
+                    onClick={() => shareFun(list.title, list.description)}
+                  >
                     <ShareIcon />
                   </IconButton>
                   <IconButton
