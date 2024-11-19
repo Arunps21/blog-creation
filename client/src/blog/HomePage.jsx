@@ -24,16 +24,24 @@ export default function HomePage() {
     setView(data);
   };
 
-  const deleteFun = async (id) => {
-    const { data } = await axios.delete(
-      `http://localhost:9000/blogRouter/deleteBlog/${id}`
-    );
-    console.log(id);
-    if (data.status == 200) {
-      alert(data.msg);
-    } else {
-      alert(data.msg);
-    }
+  // const deleteFun = async (id) => {
+  //   const { data } = await axios.delete(
+  //     `http://localhost:9000/blogRouter/deleteBlog/${id}`
+  //   );
+  //   console.log(id);
+  //   if (data.status == 200) {
+  //     alert(data.msg);
+  //   } else {
+  //     alert(data.msg);
+  //   }
+  // };
+
+  const shareFun = (title, description) => {
+    navigator.share({
+      title,
+      description,
+      url: window.location.href,
+    });
   };
 
   useEffect(() => {
@@ -42,7 +50,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Container sx={{ padding: 4}}>
+      <Container sx={{ padding: 4 }}>
         <Typography variant="h3" align="center" gutterBottom>
           Explore the Blogs
         </Typography>
@@ -64,7 +72,10 @@ export default function HomePage() {
                     <IconButton aria-label="add to favorites">
                       <FavoriteIcon />
                     </IconButton>
-                    <IconButton aria-label="share">
+                    <IconButton
+                      aria-label="share"
+                      onClick={() => shareFun(list.title, list.description)}
+                    >
                       <ShareIcon />
                     </IconButton>
                     {/* {userId && userId.trim() !== "" && (
